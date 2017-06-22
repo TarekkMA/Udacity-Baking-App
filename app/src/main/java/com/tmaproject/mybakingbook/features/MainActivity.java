@@ -1,4 +1,4 @@
-package com.tmaproject.mybakingbook;
+package com.tmaproject.mybakingbook.features;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,8 +17,10 @@ import android.widget.Button;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.tmaproject.mybakingbook.R;
 
-public class MainActivity extends AppCompatActivity implements RecipeListContract.View , NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+    implements NavigationView.OnNavigationItemSelectedListener {
 
   @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 
@@ -32,30 +34,31 @@ public class MainActivity extends AppCompatActivity implements RecipeListContrac
 
     setSupportActionBar(mToolbar);
 
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    ActionBarDrawerToggle toggle =
+        new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close);
 
     mDrawerLayout.addDrawerListener(toggle);
-
-
   }
 
   @Override public void onBackPressed() {
-    if(mDrawerLayout.isDrawerOpen(GravityCompat.START))
+    if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
       mDrawerLayout.closeDrawer(GravityCompat.START);
-    else
+    } else {
       super.onBackPressed();
+    }
   }
 
   @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     int id = item.getItemId();
 
-    switch (id){
+    switch (id) {
       case R.id.nav_about:
         Toast.makeText(this, "Make Dialog ,Tarek", Toast.LENGTH_SHORT).show();
         break;
       case R.id.nav_sourcecode:
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/TarekkMA/Udacity-Baking-App"));
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+            Uri.parse("https://github.com/TarekkMA/Udacity-Baking-App"));
         startActivity(browserIntent);
         break;
     }
@@ -64,30 +67,4 @@ public class MainActivity extends AppCompatActivity implements RecipeListContrac
     drawer.closeDrawer(GravityCompat.START);
     return true;
   }
-
-
-  /**------------------------------------**/
-
-
-  @Override public void showLoading() {
-
-  }
-
-  @Override public void hideLoading() {
-
-  }
-
-  @Override public void showError(String error) {
-
-  }
-
-  @Override public void hideError() {
-
-  }
-
-  @Override public void showItems() {
-
-  }
-
-
 }

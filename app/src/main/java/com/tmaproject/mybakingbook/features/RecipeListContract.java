@@ -1,4 +1,4 @@
-package com.tmaproject.mybakingbook;
+package com.tmaproject.mybakingbook.features;
 
 /**
  * Created by tarekkma on 6/22/17.
@@ -20,6 +20,7 @@ public interface RecipeListContract {
 
   interface Presenter{
     void getRecipeList();
+    void openRecipeDetails(int recipeId);
   }
 
 }
