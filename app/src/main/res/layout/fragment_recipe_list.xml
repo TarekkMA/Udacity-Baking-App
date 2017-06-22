@@ -30,7 +30,7 @@
       android:padding="@dimen/default_spacing"
       android:layout_gravity="center"
       android:gravity="center"
-      android:visibility="visible"
+      android:visibility="gone"
       >
 
     <ImageView
