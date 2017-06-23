@@ -1,4 +1,4 @@
-package com.tmaproject.mybakingbook.features;
+package com.tmaproject.mybakingbook.features.RecipeList;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +18,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.tmaproject.mybakingbook.R;
+import com.tmaproject.mybakingbook.Utils.FragmentUtils;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity
             R.string.navigation_drawer_close);
 
     mDrawerLayout.addDrawerListener(toggle);
+
+    FragmentUtils.replaceFragment(getSupportFragmentManager(),RecipeListFragment.newInstance(),R.id.fragmentFrame);
   }
 
   @Override public void onBackPressed() {

@@ -3,6 +3,8 @@
     package="com.tmaproject.mybakingbook"
     >
 
+  <uses-permission android:name="android.permission.INTERNET" />
+
   <application
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
@@ -10,8 +12,9 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme.NoActionBar"
+      android:name=".App"
       >
-    <activity android:name=".features.MainActivity">
+    <activity android:name=".features.RecipeList.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
