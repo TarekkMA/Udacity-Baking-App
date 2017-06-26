@@ -1,8 +1,7 @@
-package com.tmaproject.mybakingbook.model.source.recipes.remote;
+package com.tmaproject.mybakingbook.data.source.recipes.remote;
 
-import com.tmaproject.mybakingbook.Utils.RxUtils;
-import com.tmaproject.mybakingbook.model.pojo.Recipe;
-import com.tmaproject.mybakingbook.model.source.recipes.RecipesDataSource;
+import com.tmaproject.mybakingbook.data.pojo.Recipe;
+import com.tmaproject.mybakingbook.data.source.recipes.RecipesDataSource;
 import io.reactivex.Single;
 import java.util.List;
 
@@ -21,6 +20,10 @@ public class RecipesRemoteDataSource implements RecipesDataSource {
   }
 
   @Override public Single<List<Recipe>> getRecipeSteps(int recipeId) {
+    throw new UnsupportedOperationException("not implemented");
+  }
+
+  @Override public void saveRecipes(List<Recipe> recipeList) {
     throw new UnsupportedOperationException("not implemented");
   }
 }

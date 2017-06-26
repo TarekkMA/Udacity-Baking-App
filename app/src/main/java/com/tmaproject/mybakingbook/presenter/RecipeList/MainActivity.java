@@ -1,4 +1,4 @@
-package com.tmaproject.mybakingbook.features.RecipeList;
+package com.tmaproject.mybakingbook.presenter.RecipeList;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,10 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +37,9 @@ public class MainActivity extends AppCompatActivity
             R.string.navigation_drawer_close);
 
     mDrawerLayout.addDrawerListener(toggle);
+    toggle.syncState();
+    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+    navigationView.setNavigationItemSelectedListener(this);
 
     FragmentUtils.replaceFragment(getSupportFragmentManager(),RecipeListFragment.newInstance(),R.id.fragmentFrame);
   }

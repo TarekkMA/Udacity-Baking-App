@@ -1,4 +1,4 @@
-package com.tmaproject.mybakingbook.features.RecipeList;
+package com.tmaproject.mybakingbook.presenter.RecipeList;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.bumptech.glide.Glide;
 import com.tmaproject.mybakingbook.R;
-import com.tmaproject.mybakingbook.model.pojo.Recipe;
+import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +55,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.VH
     }
 
     public void bind(final Recipe recipe) {
-
+      textView.setText(recipe.getName());
+      ingredientsCountText.setText(String.valueOf(recipe.getIngredients().size()));
+      servingsCountText.setText(String.valueOf(recipe.getServings()));
+      stepsCountText.setText(String.valueOf(recipe.getSteps().size()));
+      Glide.with(itemView)
+          .load(recipe.getImage())
+          .into(imageView);
     }
   }
 }

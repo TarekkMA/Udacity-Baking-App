@@ -1,7 +1,11 @@
-package com.tmaproject.mybakingbook.model.pojo;
+package com.tmaproject.mybakingbook.data.pojo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.tmaproject.mybakingbook.data.source.recipes.local.DatabaseContract;
 import java.util.List;
 import org.parceler.Parcel;
 
@@ -9,21 +13,28 @@ import org.parceler.Parcel;
  * Created by tarekkma on 6/19/17.
  */
 
+@Entity(tableName = DatabaseContract.RECIPES_TABLE_NAME)
 @Parcel(Parcel.Serialization.BEAN)
 public class Recipe {
 
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("name")
     @Expose
     private String name;
+
+
     @SerializedName("ingredients")
-    @Expose
+    @Expose @Ignore
     private List<Ingredient> ingredients = null;
+
     @SerializedName("steps")
-    @Expose
+    @Expose @Ignore
     private List<Step> steps = null;
+
+
     @SerializedName("servings")
     @Expose
     private Integer servings;

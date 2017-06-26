@@ -1,4 +1,4 @@
-package com.tmaproject.mybakingbook.features;
+package com.tmaproject.mybakingbook.presenter;
 
 /**
  * Created by tarekkma on 6/23/17.

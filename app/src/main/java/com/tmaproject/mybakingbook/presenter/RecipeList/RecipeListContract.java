@@ -1,7 +1,7 @@
-package com.tmaproject.mybakingbook.features.RecipeList;
+package com.tmaproject.mybakingbook.presenter.RecipeList;
 
-import com.tmaproject.mybakingbook.features.BaseContract;
-import com.tmaproject.mybakingbook.model.pojo.Recipe;
+import com.tmaproject.mybakingbook.presenter.BaseContract;
+import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import java.util.List;
 
 /**

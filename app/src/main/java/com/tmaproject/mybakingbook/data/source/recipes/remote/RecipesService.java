@@ -1,13 +1,9 @@
-package com.tmaproject.mybakingbook.model.source.recipes.remote;
+package com.tmaproject.mybakingbook.data.source.recipes.remote;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.tmaproject.mybakingbook.App;
-import com.tmaproject.mybakingbook.model.pojo.Recipe;
+import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import io.reactivex.Single;
 import java.util.List;
 import okhttp3.OkHttpClient;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

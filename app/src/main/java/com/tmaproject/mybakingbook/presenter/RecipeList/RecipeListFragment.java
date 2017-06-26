@@ -1,4 +1,4 @@
-package com.tmaproject.mybakingbook.features.RecipeList;
+package com.tmaproject.mybakingbook.presenter.RecipeList;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,8 +13,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.Utils.ResponsiveUi;
-import com.tmaproject.mybakingbook.features.RecipeList.RecipeListContract.Presenter;
-import com.tmaproject.mybakingbook.model.pojo.Recipe;
+import com.tmaproject.mybakingbook.presenter.RecipeList.RecipeListContract.Presenter;
+import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import java.util.List;
 
 /**

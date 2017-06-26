@@ -1,4 +1,4 @@
-package com.tmaproject.mybakingbook.model.source.images;
+package com.tmaproject.mybakingbook.data.source.images;
 
 import io.reactivex.Single;
 

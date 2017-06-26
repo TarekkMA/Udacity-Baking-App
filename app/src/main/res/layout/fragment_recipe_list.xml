@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tmaproject.mybakingbook.features.RecipeList.RecipeListFragment"
+    tools:context="com.tmaproject.mybakingbook.presenter.RecipeList.RecipeListFragment"
     >
 
   <LinearLayout

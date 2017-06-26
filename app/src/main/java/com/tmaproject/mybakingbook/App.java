@@ -1,10 +1,14 @@
 package com.tmaproject.mybakingbook;
 
 import android.app.Application;
+import android.arch.persistence.room.Room;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.tmaproject.mybakingbook.model.source.recipes.remote.RecipesRemoteDataSource;
-import com.tmaproject.mybakingbook.model.source.recipes.remote.RecipesService;
+import com.tmaproject.mybakingbook.Utils.PreferencesUtils;
+import com.tmaproject.mybakingbook.data.pojo.Recipe;
+import com.tmaproject.mybakingbook.data.source.recipes.local.DatabaseContract;
+import com.tmaproject.mybakingbook.data.source.recipes.local.RecipesDatabase;
+import com.tmaproject.mybakingbook.data.source.recipes.remote.RecipesService;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
@@ -17,7 +21,11 @@ public class App extends Application {
   // singleton
   private static App INSTANCE;
 
-  public OkHttpClient client;
+  public OkHttpClient client = new OkHttpClient();
+
+  public RecipesDatabase database;
+
+  public PreferencesUtils preferencesUtils;
 
   public static App get() {
     return INSTANCE;
@@ -33,5 +41,9 @@ public class App extends Application {
     client = new OkHttpClient.Builder().addInterceptor(new StethoInterceptor()).build();
 
     RecipesService.init(client);
+
+    database = Room.databaseBuilder(this,RecipesDatabase.class, DatabaseContract.DATABASE_NAME).build();
+
+    preferencesUtils = new PreferencesUtils(this);
   }
 }
