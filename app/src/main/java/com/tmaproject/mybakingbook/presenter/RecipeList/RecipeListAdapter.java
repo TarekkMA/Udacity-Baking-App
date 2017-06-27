@@ -1,5 +1,6 @@
 package com.tmaproject.mybakingbook.presenter.RecipeList;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
+import com.tmaproject.mybakingbook.presenter.RecipeDetails.RecipeDetailsActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.VH
   }
 
   @Override public void onBindViewHolder(VH holder, int position) {
-    holder.bind(recipeList.get(position));
+    Recipe recipe = recipeList.get(position);
+    holder.bind(recipe);
   }
 
   @Override public int getItemCount() {
@@ -62,6 +65,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.VH
       Glide.with(itemView)
           .load(recipe.getImage())
           .into(imageView);
+      Context c = itemView.getContext();
+      itemView.setOnClickListener(v -> RecipeDetailsActivity.startThisActivity(c,recipe.getId()));
     }
   }
 }

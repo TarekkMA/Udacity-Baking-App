@@ -1,5 +1,6 @@
 package com.tmaproject.mybakingbook.data.pojo;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
@@ -26,9 +27,14 @@ public class Step {
 
   private int recipeId;
 
-  @PrimaryKey
+  @PrimaryKey(autoGenerate = true)
+  @ColumnInfo(name = "id")
+  //This is the database id
+  private int _id;
+
   @SerializedName("id")
-  private Integer id;
+  //The webservice so-called "id"
+  private Integer index;
 
   @SerializedName("shortDescription")
   private String shortDescription;
@@ -50,12 +56,12 @@ public class Step {
     this.recipeId = recipeId;
   }
 
-  public Integer getId() {
-    return id;
+  public Integer getIndex() {
+    return index;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setIndex(Integer index) {
+    this.index = index;
   }
 
   public String getShortDescription() {
@@ -88,5 +94,13 @@ public class Step {
 
   public void setThumbnailURL(String thumbnailURL) {
     this.thumbnailURL = thumbnailURL;
+  }
+
+  public int getId() {
+    return _id;
+  }
+
+  public void setId(int id) {
+    this._id = id;
   }
 }

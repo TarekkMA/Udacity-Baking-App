@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.tmaproject.mybakingbook.R;
-import com.tmaproject.mybakingbook.Utils.FragmentUtils;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity
   @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 
   @BindView(R.id.toolbar) Toolbar mToolbar;
+
+  private RecipeListContract.View recipeListFragment;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -41,7 +43,10 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
-    FragmentUtils.replaceFragment(getSupportFragmentManager(),RecipeListFragment.newInstance(),R.id.fragmentFrame);
+    recipeListFragment = RecipeListFragment.newInstance();
+
+    getSupportFragmentManager().
+        beginTransaction().replace(R.id.fragmentFrame, (Fragment) recipeListFragment).commit();
   }
 
   @Override public void onBackPressed() {
@@ -63,6 +68,9 @@ public class MainActivity extends AppCompatActivity
         Intent browserIntent = new Intent(Intent.ACTION_VIEW,
             Uri.parse("https://github.com/TarekkMA/Udacity-Baking-App"));
         startActivity(browserIntent);
+        break;
+      case R.id.nav_sync:
+        recipeListFragment.getPresenter().syncData();
         break;
     }
 

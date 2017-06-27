@@ -1,6 +1,7 @@
 package com.tmaproject.mybakingbook.presenter.RecipeList;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,9 +54,13 @@ public class RecipeListFragment extends Fragment implements RecipeListContract.V
     mAdapter = new RecipeListAdapter();
     recycler.setAdapter(mAdapter);
 
-    presenter = new RecipeListPresenter(this);
 
     return view;
+  }
+
+  @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    presenter = new RecipeListPresenter(this);
   }
 
   @Override public void onResume() {
@@ -90,4 +95,7 @@ public class RecipeListFragment extends Fragment implements RecipeListContract.V
     mAdapter.swapList(recipeList);
   }
 
+  @Override public Presenter getPresenter() {
+    return presenter;
+  }
 }

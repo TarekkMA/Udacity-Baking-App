@@ -1,9 +1,7 @@
 package com.tmaproject.mybakingbook.presenter.RecipeList;
 
+import com.tmaproject.mybakingbook.App;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
-import com.tmaproject.mybakingbook.data.source.recipes.RecipeRepository;
-import com.tmaproject.mybakingbook.data.source.recipes.local.RecipesLocalDataSource;
-import com.tmaproject.mybakingbook.data.source.recipes.remote.RecipesRemoteDataSource;
 import com.tmaproject.mybakingbook.domain.GetRecipeListInteractor;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -14,7 +12,6 @@ import timber.log.Timber;
 /**
  * Created by tarekkma on 6/23/17.
  */
-
 
 public class RecipeListPresenter implements RecipeListContract.Presenter {
 
@@ -57,7 +54,8 @@ public class RecipeListPresenter implements RecipeListContract.Presenter {
         }));
   }
 
-  @Override public void openRecipeDetails(int recipeId) {
-
+  @Override public void syncData() {
+    App.get().preferencesUtils.setDataUpToDate(false);
+    getRecipeList();
   }
 }

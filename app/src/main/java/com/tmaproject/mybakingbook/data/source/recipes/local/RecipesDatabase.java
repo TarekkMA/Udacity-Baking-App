@@ -10,7 +10,7 @@ import com.tmaproject.mybakingbook.data.pojo.Step;
  * Created by tarekkma on 6/24/17.
  */
 
-@Database(entities = { Recipe.class, Ingredient.class, Step.class} ,version = 2)
+@Database(entities = { Recipe.class, Ingredient.class, Step.class} ,version = 3)
 public abstract  class RecipesDatabase extends RoomDatabase{
   public abstract RecipesDao recipesDao();
 }

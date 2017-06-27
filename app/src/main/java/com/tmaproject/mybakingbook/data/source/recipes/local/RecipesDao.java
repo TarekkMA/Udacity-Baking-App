@@ -37,6 +37,9 @@ public interface RecipesDao {
   @Query("Select * FROM " + RECIPES_TABLE_NAME)
   List<Recipe> getAllRecipes();
 
+  @Query("Select * FROM " + RECIPES_TABLE_NAME + " WHERE id=:recipeId")
+  Recipe getRecipe(int recipeId);
+
   @Query("Select * FROM " + INGREDIENT_TABLE_NAME + " WHERE recipeId=:recipeId")
   List<Ingredient> getAllIngredients(int recipeId);
 

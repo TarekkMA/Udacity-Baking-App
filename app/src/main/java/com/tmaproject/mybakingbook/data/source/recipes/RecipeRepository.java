@@ -1,7 +1,9 @@
 package com.tmaproject.mybakingbook.data.source.recipes;
 
 import com.tmaproject.mybakingbook.App;
+import com.tmaproject.mybakingbook.data.pojo.Ingredient;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
+import com.tmaproject.mybakingbook.data.pojo.Step;
 import com.tmaproject.mybakingbook.data.source.recipes.local.RecipesLocalDataSource;
 import com.tmaproject.mybakingbook.data.source.recipes.remote.RecipesRemoteDataSource;
 import io.reactivex.Single;
@@ -37,11 +39,15 @@ public class RecipeRepository implements RecipesDataSource {
     }
   }
 
-  @Override public Single<List<Recipe>> getRecipeIngredients(int recipeId) {
+  @Override public Single<Recipe> getRecipe(int recipeId) {
+    return mLocalDataSource.getRecipe(recipeId);
+  }
+
+  @Override public Single<List<Ingredient>> getRecipeIngredients(int recipeId) {
     return null;
   }
 
-  @Override public Single<List<Recipe>> getRecipeSteps(int recipeId) {
+  @Override public Single<List<Step>> getRecipeSteps(int recipeId) {
     return null;
   }
 

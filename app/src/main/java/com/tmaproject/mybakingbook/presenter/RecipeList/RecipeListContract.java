@@ -20,11 +20,12 @@ public interface RecipeListContract  {
 
     void showItems(List<Recipe> recipeList);
 
+    Presenter getPresenter();
   }
 
   interface Presenter extends BaseContract.BasePresenter{
     void getRecipeList();
-    void openRecipeDetails(int recipeId);
+    void syncData();
   }
 
 }

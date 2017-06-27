@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/settings_48"
-            android:title="Settings" />
 
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/help_48"
-            android:title="About" />
+  <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_sync"
+        android:icon="@drawable/cloud_sync_48"
+        android:title="@string/nav_sync_data"
+        />
 
-        <item
-            android:id="@+id/nav_sourcecode"
-            android:icon="@drawable/github_black_50"
-            android:title="Source Code" />
-    </group>
+      <menu>
+        <group android:checkableBehavior="single">
+          <item
+              android:id="@+id/nav_settings"
+              android:icon="@drawable/settings_48"
+              android:title="@string/nav_settings"
+              />
+
+          <item
+              android:id="@+id/nav_about"
+              android:icon="@drawable/help_48"
+              android:title="@string/nav_about"
+              />
+
+          <item
+              android:id="@+id/nav_sourcecode"
+              android:icon="@drawable/github_black_50"
+              android:title="@string/nav_source_code"
+              />
+        </group>
+      </menu>
+  </group>
 
 </menu>
