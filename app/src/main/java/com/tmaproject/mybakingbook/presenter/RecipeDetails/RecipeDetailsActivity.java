@@ -31,7 +31,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
       stepsFragment = StepsFragment.newInstance(recipeId, 0/* Start Default */);
       recipeDetailsDFragment.setCallback(stepsFragment);
     } else {
-      recipeDetailsDFragment.setCallback(step -> StepsActivity.startThisActivity(this,recipeId,step.getId()));
+      recipeDetailsDFragment.setCallback(step -> StepsActivity.startThisActivity(this,recipeId,step.getIndex()));
     }
 
     getSupportFragmentManager().beginTransaction()

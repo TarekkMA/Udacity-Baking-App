@@ -89,6 +89,8 @@ dependencies {
   testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 
   testCompile 'junit:junit:4.12'
+  testCompile 'org.mockito:mockito-core:2.7.22'
+  androidTestCompile 'org.mockito:mockito-android:2.7.22'
   annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-alpha3'
   annotationProcessor 'org.parceler:parceler:1.1.8'
   annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
