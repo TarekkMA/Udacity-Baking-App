@@ -3,48 +3,49 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="@dimen/small_spacing"
+    android:paddingRight="@dimen/default_spacing"
+    android:paddingLeft="@dimen/default_spacing"
     >
+
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:gravity="center"
-      android:padding="@dimen/small_spacing"
-      android:background="?attr/selectableItemBackground"
       >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2."
-        android:minWidth="30sp"
+        android:text="2"
+        android:minWidth="40sp"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textColor="#000"
         android:textStyle="bold"
-        android:id="@+id/number"
+        android:id="@+id/quantity"
         />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Graham Cracker crumbs"
-        android:layout_weight="1"
-        android:textSize="18sp"
+        android:text="CUP"
+        android:minWidth="60sp"
+        android:textSize="14sp"
         android:textColor="#000"
-        android:paddingRight="@dimen/small_spacing"
-        android:paddingLeft="@dimen/small_spacing"
-        android:id="@+id/item_name"
+        android:gravity="center"
+        android:id="@+id/unit"
         />
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/video_48"
-        android:id="@+id/video"
-        />
+
   </LinearLayout>
-  <View
+  <TextView
       android:layout_width="match_parent"
-      android:layout_height="1dp"
-      android:background="?android:attr/listDivider"
+      android:layout_height="wrap_content"
+      android:text="Graham Cracker crumbs"
+      android:layout_weight="1"
+      android:textSize="18sp"
+      android:textColor="#000"
+      android:id="@+id/item_name"
+      android:paddingBottom="@dimen/small_spacing"
+      android:gravity="center"
       />
 </LinearLayout>

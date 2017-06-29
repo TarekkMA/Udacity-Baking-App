@@ -12,11 +12,11 @@ import io.reactivex.Single;
  * Created by tarekkma on 6/27/17.
  */
 
-public class GetRecipeDetailsInteractor {
+public class GetRecipeInteractor {
 
   private RecipeRepository mRecipeRepository;
 
-  public GetRecipeDetailsInteractor() {
+  public GetRecipeInteractor() {
     this.mRecipeRepository =
         new RecipeRepository(new RecipesLocalDataSource(), new RecipesRemoteDataSource());
   }

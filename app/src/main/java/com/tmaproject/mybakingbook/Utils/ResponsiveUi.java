@@ -21,15 +21,14 @@ public class ResponsiveUi {
   public static int getCoulumnNumber() {
     if (isTablet()) {
 
-      int itemWidthDp = 250;
-      //TODO TEST THIS CODE
+      int itemWidthDp = 150;
       double multiplier = (isTablet()) ? .5 : 1;
       DisplayMetrics displayMetrics = App.get().getResources().getDisplayMetrics();
       float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
       dpWidth *= multiplier;
       int res = (int) (dpWidth / itemWidthDp);
 
-      return (res == 0) ? 1 : res;
+     return (res == 0) ? 1 : res;
     } else if (isLandscape()) {
       return 2;
     } else {

@@ -25,6 +25,9 @@ public class RecipesLocalDataSource implements RecipesDataSource {
   public RecipesLocalDataSource() {
     dao = App.get().database.recipesDao();
   }
+  public RecipesLocalDataSource(RecipesDao dao){
+    this.dao = dao;
+  }
 
   private Observable<Recipe> getSubdata(Recipe recipeOnly) {
     return Observable.just(recipeOnly).map(recipe -> {

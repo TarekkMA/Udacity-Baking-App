@@ -1,11 +1,8 @@
 package com.tmaproject.mybakingbook.presenter.RecipeDetails;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +18,7 @@ import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.data.pojo.Ingredient;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import com.tmaproject.mybakingbook.data.pojo.Step;
+import com.tmaproject.mybakingbook.presenter.Callbacks;
 import com.tmaproject.mybakingbook.presenter.RecipeDetails.item_views.IngredientItemView;
 import com.tmaproject.mybakingbook.presenter.RecipeDetails.item_views.StepItemView;
 import java.util.List;
@@ -44,6 +42,12 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsCont
 
   private Unbinder unbinder;
 
+  private Callbacks.StepClicked callback;
+
+  public void setCallback(Callbacks.StepClicked callback) {
+    this.callback = callback;
+  }
+
   public static RecipeDetailsFragment newInstance(int recipeId) {
     Bundle args = new Bundle();
     RecipeDetailsFragment fragment = new RecipeDetailsFragment();
@@ -51,6 +55,8 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsCont
     fragment.setArguments(args);
     return fragment;
   }
+
+
 
   public RecipeDetailsFragment() {
     // Required empty public constructor
@@ -99,7 +105,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsCont
   @Override public void showSteps(List<Step> stepList) {
     stepsListLayout.removeAllViews();
     for (Step step : stepList) {
-      stepsListLayout.addView(new StepItemView(getContext()).bind(step));
+      stepsListLayout.addView(new StepItemView(getContext(), callback).bind(step));
     }
   }
 

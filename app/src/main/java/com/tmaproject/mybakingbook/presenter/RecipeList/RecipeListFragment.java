@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.Utils.ResponsiveUi;
+import com.tmaproject.mybakingbook.presenter.RecipeDetails.RecipeDetailsActivity;
 import com.tmaproject.mybakingbook.presenter.RecipeList.RecipeListContract.Presenter;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import java.util.List;
@@ -47,19 +48,20 @@ public class RecipeListFragment extends Fragment implements RecipeListContract.V
 
     unbinder = ButterKnife.bind(this, view);
 
-
-    //RecyclerView
-    GridLayoutManager layoutManager = new GridLayoutManager(getContext() , ResponsiveUi.getCoulumnNumber());
-    recycler.setLayoutManager(layoutManager);
-    mAdapter = new RecipeListAdapter();
-    recycler.setAdapter(mAdapter);
-
-
     return view;
   }
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
+
+    //RecyclerView
+    GridLayoutManager layoutManager =
+        new GridLayoutManager(getContext(), ResponsiveUi.getCoulumnNumber());
+    recycler.setLayoutManager(layoutManager);
+    mAdapter = new RecipeListAdapter(
+        recipe -> RecipeDetailsActivity.startThisActivity(getContext(), recipe.getId()));
+    recycler.setAdapter(mAdapter);
+
     presenter = new RecipeListPresenter(this);
   }
 

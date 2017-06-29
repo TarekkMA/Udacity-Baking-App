@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    >
+
+  <TextView
+      android:id="@+id/appwidget_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+      android:text="Blue Cake"
+      android:textColor="#ffffff"
+      android:textSize="24sp"
+      android:gravity="center"
+      android:textStyle="bold"
+      android:padding="@dimen/small_spacing"
+      android:contentDescription="@string/appwidget_text"
+      android:background="@color/colorPrimaryDark"
+      />
+
+  <ListView
+      android:id="@+id/appwidget_list"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      ></ListView>
+
+</LinearLayout>

@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.tmaproject.mybakingbook.R;
+import com.tmaproject.mybakingbook.Utils.ResponsiveUi;
+import com.tmaproject.mybakingbook.presenter.Steps.StepsActivity;
+import com.tmaproject.mybakingbook.presenter.Steps.StepsFragment;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
 
@@ -21,8 +24,23 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     setContentView(R.layout.activity_recipe_details);
 
     int recipeId = getIntent().getIntExtra(KEY_RECIPE_ID, -1);
-    Fragment fragment = RecipeDetailsFragment.newInstance(recipeId);
+    RecipeDetailsFragment recipeDetailsDFragment = RecipeDetailsFragment.newInstance(recipeId);
+    StepsFragment stepsFragment = null;
 
-    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment).commit();
+    if (ResponsiveUi.isTablet()) {
+      stepsFragment = StepsFragment.newInstance(recipeId, 0/* Start Default */);
+      recipeDetailsDFragment.setCallback(stepsFragment);
+    } else {
+      recipeDetailsDFragment.setCallback(step -> StepsActivity.startThisActivity(this,recipeId,step.getId()));
+    }
+
+    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.fragmentFrame, recipeDetailsDFragment)
+        .commit();
+    if (stepsFragment != null) {
+      getSupportFragmentManager().beginTransaction()
+          .replace(R.id.fragmentFrame2, stepsFragment)
+          .commit();
+    }
   }
 }

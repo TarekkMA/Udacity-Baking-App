@@ -1,10 +1,7 @@
 package com.tmaproject.mybakingbook.presenter.RecipeDetails;
 
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
-import com.tmaproject.mybakingbook.data.source.recipes.RecipeRepository;
-import com.tmaproject.mybakingbook.data.source.recipes.local.RecipesLocalDataSource;
-import com.tmaproject.mybakingbook.data.source.recipes.remote.RecipesRemoteDataSource;
-import com.tmaproject.mybakingbook.domain.GetRecipeDetailsInteractor;
+import com.tmaproject.mybakingbook.domain.GetRecipeInteractor;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -18,7 +15,7 @@ class RecipeDetailsPresenter implements RecipeDetailsContract.Presenter {
 
   CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-  GetRecipeDetailsInteractor interactor;
+  GetRecipeInteractor interactor;
 
   RecipeDetailsContract.View view;
   int recipeId;
@@ -26,7 +23,7 @@ class RecipeDetailsPresenter implements RecipeDetailsContract.Presenter {
   public RecipeDetailsPresenter(RecipeDetailsContract.View view, int recipeId) {
     this.view = view;
     this.recipeId = recipeId;
-    interactor = new GetRecipeDetailsInteractor();
+    interactor = new GetRecipeInteractor();
   }
 
   @Override public void subscribe() {

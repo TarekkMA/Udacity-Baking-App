@@ -44,11 +44,11 @@ public class RecipeRepository implements RecipesDataSource {
   }
 
   @Override public Single<List<Ingredient>> getRecipeIngredients(int recipeId) {
-    return null;
+    return mLocalDataSource.getRecipeIngredients(recipeId);
   }
 
   @Override public Single<List<Step>> getRecipeSteps(int recipeId) {
-    return null;
+    return mLocalDataSource.getRecipeSteps(recipeId);
   }
 
   @Override public void saveRecipes(List<Recipe> recipeList) {

@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
+import com.tmaproject.mybakingbook.presenter.Callbacks;
 import com.tmaproject.mybakingbook.presenter.RecipeDetails.RecipeDetailsActivity;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,12 @@ import java.util.List;
 
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.VH> {
 
-  List<Recipe> recipeList = new ArrayList<>();
+  private List<Recipe> recipeList = new ArrayList<>();
+  private Callbacks.AdapterRecipeClicked clickCallback;
+
+  public RecipeListAdapter(Callbacks.AdapterRecipeClicked clickCallback) {
+    this.clickCallback = clickCallback;
+  }
 
   @Override public VH onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -33,6 +39,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.VH
   @Override public void onBindViewHolder(VH holder, int position) {
     Recipe recipe = recipeList.get(position);
     holder.bind(recipe);
+    holder.itemView.setOnClickListener(v -> clickCallback.onClick(recipe));
   }
 
   @Override public int getItemCount() {
@@ -62,11 +69,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.VH
       ingredientsCountText.setText(String.valueOf(recipe.getIngredients().size()));
       servingsCountText.setText(String.valueOf(recipe.getServings()));
       stepsCountText.setText(String.valueOf(recipe.getSteps().size()));
+      if(itemView!=null)
       Glide.with(itemView)
           .load(recipe.getImage())
           .into(imageView);
-      Context c = itemView.getContext();
-      itemView.setOnClickListener(v -> RecipeDetailsActivity.startThisActivity(c,recipe.getId()));
     }
   }
 }

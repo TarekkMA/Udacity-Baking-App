@@ -9,6 +9,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.data.pojo.Step;
+import com.tmaproject.mybakingbook.presenter.Callbacks;
+import com.tmaproject.mybakingbook.presenter.Steps.StepsActivity;
 
 /**
  * Created by tarekkma on 6/28/17.
@@ -20,9 +22,11 @@ public class StepItemView extends LinearLayout {
   @BindView(R.id.item_name)TextView name;
   @BindView(R.id.video)ImageView videoIcon;
 
-  public StepItemView(Context context) {
-    super(context);
+  private Callbacks.StepClicked callback;
 
+  public StepItemView(Context context, Callbacks.StepClicked callback) {
+    super(context);
+    this.callback = callback;
 
     inflate(getContext(), R.layout.item_step,this);
     ButterKnife.bind(this,this);
@@ -34,6 +38,7 @@ public class StepItemView extends LinearLayout {
     name.setText(step.getShortDescription());
     if(step.getVideoURL()==null || step.getVideoURL().isEmpty())
       videoIcon.setVisibility(INVISIBLE);
+    if(callback!=null)setOnClickListener(v -> callback.onClick(step));
     return this;
   }
 

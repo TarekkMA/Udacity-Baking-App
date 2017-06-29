@@ -10,18 +10,38 @@ import android.content.SharedPreferences;
 public class PreferencesUtils {
 
   private  SharedPreferences imagePrefs;
-  private static final String IMAGE_CACHE_PREFS_NAME = "image-cache-prefs";
+  public static final String IMAGE_CACHE_PREFS_NAME = "image-cache-prefs";
 
   private  SharedPreferences appPrefs;
-  private static final String APP_PREFS_NAME = "app-prefs";
+  public static final String APP_PREFS_NAME = "app-prefs";
+
+  private  SharedPreferences widgetPrefs;
+  public static final String WIDGET_PREFS_NAME = "widget-prefs";
 
 
   private static final String SYNC_Key = "SYNC_KEY";
+
+  private static final String WIDGET_PREFIX = "WIDGET_";
 
 
   public PreferencesUtils(Context context){
     imagePrefs = context.getSharedPreferences(IMAGE_CACHE_PREFS_NAME,Context.MODE_PRIVATE);
     appPrefs = context.getSharedPreferences(APP_PREFS_NAME,Context.MODE_PRIVATE);
+    widgetPrefs = context.getSharedPreferences(WIDGET_PREFS_NAME,Context.MODE_PRIVATE);
+  }
+
+  public PreferencesUtils(Context context,String prefsName){
+    switch (prefsName){
+      case IMAGE_CACHE_PREFS_NAME:
+        imagePrefs = context.getSharedPreferences(IMAGE_CACHE_PREFS_NAME,Context.MODE_PRIVATE);
+        break;
+      case APP_PREFS_NAME:
+        appPrefs = context.getSharedPreferences(APP_PREFS_NAME,Context.MODE_PRIVATE);
+        break;
+      case WIDGET_PREFS_NAME:
+        widgetPrefs = context.getSharedPreferences(WIDGET_PREFS_NAME,Context.MODE_PRIVATE);
+        break;
+    }
   }
 
 
@@ -30,6 +50,13 @@ public class PreferencesUtils {
   }
   private void putString(String key,String value,SharedPreferences preferences){
     preferences.edit().putString(key,value).apply();
+  }
+
+  private int getInt(String key,SharedPreferences preferences){
+    return preferences.getInt(key,-1);
+  }
+  private void putInt(String key,int value,SharedPreferences preferences){
+    preferences.edit().putInt(key,value).apply();
   }
 
   private boolean getBoolean(String key,SharedPreferences preferences){
@@ -53,6 +80,14 @@ public class PreferencesUtils {
 
   public void setDataUpToDate(boolean state){
     putBoolean(SYNC_Key,state,appPrefs);
+  }
+
+  public void setWidgetRecipeId(int widgetId,int recipeId){
+    putInt(WIDGET_PREFIX+widgetId,recipeId,widgetPrefs);
+  }
+
+  public int getWidgetRecipeId(int widgetId){
+    return getInt(WIDGET_PREFIX+widgetId,widgetPrefs);
   }
 
 
