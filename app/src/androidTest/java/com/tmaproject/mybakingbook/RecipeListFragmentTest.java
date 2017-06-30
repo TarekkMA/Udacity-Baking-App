@@ -12,11 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
-import static android.support.test.espresso.Espresso.*;
-import static android.support.test.espresso.action.*;
-import static android.support.test.espresso.matcher.ViewMatchers.*;
-import static org.hamcrest.Matchers.is;
-
 /**
  * Created by tarekkma on 6/30/17.
  */

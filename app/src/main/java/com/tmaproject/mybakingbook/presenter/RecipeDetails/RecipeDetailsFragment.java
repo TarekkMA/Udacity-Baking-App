@@ -13,7 +13,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.data.pojo.Ingredient;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
@@ -91,7 +91,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsCont
   }
 
   @Override public void showRecipeDetails(Recipe recipe) {
-    Glide.with(this).load(recipe.getImage()).into(recipeImageView);
+    Picasso.with(getContext()).load(recipe.getImage()).into(recipeImageView);
     toolbarLayout.setTitle(recipe.getName());
   }
 

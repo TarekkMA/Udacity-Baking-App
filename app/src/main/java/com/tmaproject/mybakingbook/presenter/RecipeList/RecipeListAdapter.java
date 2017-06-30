@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import com.tmaproject.mybakingbook.presenter.Callbacks;
@@ -70,7 +70,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.VH
       servingsCountText.setText(String.valueOf(recipe.getServings()));
       stepsCountText.setText(String.valueOf(recipe.getSteps().size()));
       if(itemView!=null)
-      Glide.with(itemView)
+      Picasso.with(itemView.getContext())
           .load(recipe.getImage())
           .into(imageView);
     }
