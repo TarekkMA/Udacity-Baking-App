@@ -23,6 +23,7 @@
           android:scaleType="centerCrop"
           app:layout_collapseMode="parallax"
           tools:src="@drawable/demo"
+          android:contentDescription="@string/recipe_image_description"
           android:focusableInTouchMode="true"/>
       <FrameLayout
           android:layout_width="match_parent"
@@ -40,7 +41,7 @@
   </android.support.design.widget.AppBarLayout>
 
   <android.support.v4.widget.NestedScrollView
-      android:id="@+id/recycler_details"
+      android:id="@+id/scroll_details"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"

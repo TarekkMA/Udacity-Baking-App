@@ -3,10 +3,11 @@ package com.tmaproject.mybakingbook.presenter.RecipeDetails;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsCont
 
   @BindView(R.id.background_image) ImageView recipeImageView;
   @BindView(R.id.collapsing_toolbar) CollapsingToolbarLayout toolbarLayout;
+  @BindView(R.id.toolbar) Toolbar toolbar;
 
   @BindView(R.id.ingredient_layout_list) LinearLayout ingredientsListLayout;
   @BindView(R.id.steps_layout_list) LinearLayout stepsListLayout;
@@ -44,8 +46,8 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsCont
 
   private Callbacks.StepClicked callback;
 
-  public void setCallback(Callbacks.StepClicked callback) {
-    this.callback = callback;
+  public RecipeDetailsFragment() {
+    // Required empty public constructor
   }
 
   public static RecipeDetailsFragment newInstance(int recipeId) {
@@ -56,28 +58,29 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsCont
     return fragment;
   }
 
-
-
-  public RecipeDetailsFragment() {
-    // Required empty public constructor
+  public void setCallback(Callbacks.StepClicked callback) {
+    this.callback = callback;
   }
 
-  @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  @SuppressWarnings("ConstantConditions") @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_recipe_details, container, false);
     unbinder = ButterKnife.bind(this, view);
+    ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
     return view;
   }
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
     recipeId = getArguments().getInt(KEY_RECIPE_ID);
-    presenter = new RecipeDetailsPresenter(this, recipeId);
   }
 
   @Override public void onResume() {
     super.onResume();
-    presenter.subscribe();
+    presenter.subscribe(this);
   }
 
   @Override public void onDestroyView() {
@@ -111,5 +114,9 @@ public class RecipeDetailsFragment extends Fragment implements RecipeDetailsCont
 
   @Override public void showMessage(String message) {
     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+  }
+
+  @Override public void setPresenter(RecipeDetailsContract.Presenter presenter) {
+    this.presenter = presenter;
   }
 }

@@ -1,5 +1,6 @@
 package com.tmaproject.mybakingbook.presenter.RecipeDetails.item_views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,13 +11,13 @@ import butterknife.ButterKnife;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.data.pojo.Step;
 import com.tmaproject.mybakingbook.presenter.Callbacks;
-import com.tmaproject.mybakingbook.presenter.Steps.StepsActivity;
 
 /**
- * Created by tarekkma on 6/28/17.
+ * Created by TarekLMA on 6/28/17.
+ * tarekkma@gmail.com
  */
 
-public class StepItemView extends LinearLayout {
+@SuppressLint("ViewConstructor") public class StepItemView extends LinearLayout {
 
   @BindView(R.id.number)TextView number;
   @BindView(R.id.item_name)TextView name;
@@ -39,6 +40,9 @@ public class StepItemView extends LinearLayout {
     if(step.getVideoURL()==null || step.getVideoURL().isEmpty())
       videoIcon.setVisibility(INVISIBLE);
     if(callback!=null)setOnClickListener(v -> callback.onClick(step));
+
+    //for testing
+    videoIcon.setContentDescription(step.getIndex() + "");
     return this;
   }
 

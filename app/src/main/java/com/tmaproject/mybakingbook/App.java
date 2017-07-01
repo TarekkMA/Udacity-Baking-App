@@ -4,10 +4,8 @@ import android.app.Application;
 import android.arch.persistence.room.Room;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-import com.google.android.exoplayer2.ExoPlayer;
 import com.squareup.leakcanary.LeakCanary;
 import com.tmaproject.mybakingbook.Utils.PreferencesUtils;
-import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import com.tmaproject.mybakingbook.data.source.recipes.local.DatabaseContract;
 import com.tmaproject.mybakingbook.data.source.recipes.local.RecipesDatabase;
 import com.tmaproject.mybakingbook.data.source.recipes.remote.RecipesService;
@@ -15,7 +13,8 @@ import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
 /**
- * Created by tarekkma on 6/22/17.
+ * Created by TarekLMA on 6/22/17.
+ * tarekkma@gmail.com
  */
 
 public class App extends Application {
@@ -28,6 +27,8 @@ public class App extends Application {
   public RecipesDatabase database;
 
   public PreferencesUtils preferencesUtils;
+
+  public PresenterProvider presenterProvider;
 
   public static App get() {
     return INSTANCE;
@@ -54,7 +55,12 @@ public class App extends Application {
     database = Room.databaseBuilder(this,RecipesDatabase.class, DatabaseContract.DATABASE_NAME).build();
 
     preferencesUtils = new PreferencesUtils(this);
+
+    presenterProvider = new PresenterProvider();
   }
 
-
+  //For testing
+  public void setPresenterProvider(PresenterProvider presenterProvider) {
+    this.presenterProvider = presenterProvider;
+  }
 }

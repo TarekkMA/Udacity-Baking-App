@@ -9,31 +9,25 @@ import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.source.dash.DashMediaSource;
-import com.google.android.exoplayer2.source.dash.DefaultDashChunkSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
-import com.google.android.exoplayer2.upstream.HttpDataSource;
 import com.google.android.exoplayer2.util.Util;
 import com.tmaproject.mybakingbook.App;
-import com.tmaproject.mybakingbook.BuildConfig;
 import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import com.tmaproject.mybakingbook.data.pojo.Step;
 import com.tmaproject.mybakingbook.domain.GetRecipeInteractor;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
-import java.util.List;
 import timber.log.Timber;
 
 /**
- * Created by tarekkma on 6/28/17.
+ * Created by TarekLMA on 6/28/17.
+ * tarekkma@gmail.com
  */
 
 public class StepsPresenter implements StepsContract.Presenter {
 
-  CompositeDisposable compositeDisposable = new CompositeDisposable();
+  private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
   private StepsContract.View view;
   private int recipeId;
@@ -43,11 +37,9 @@ public class StepsPresenter implements StepsContract.Presenter {
   private GetRecipeInteractor interactor;
   private int currentStep = -1;
 
-  public StepsPresenter(StepsContract.View view, int recipeId,int currentStep) {
+  public StepsPresenter() {
     interactor = new GetRecipeInteractor();
-    this.view = view;
-    this.recipeId = recipeId;
-    this.currentStep = currentStep;
+    this.currentStep = 0;
   }
 
   private void showStepAt(int pos){
@@ -82,7 +74,12 @@ public class StepsPresenter implements StepsContract.Presenter {
 
   }
 
-  @Override public void subscribe() {
+  @Override public StepsContract.View getView() {
+    return view;
+  }
+
+  @Override public void subscribe(StepsContract.View view) {
+    this.view = view;
     loadRecipeDetails();
   }
 
@@ -92,6 +89,14 @@ public class StepsPresenter implements StepsContract.Presenter {
 
   @Override public int getCurrentInedex() {
     return currentStep;
+  }
+
+  @Override public void setCurrentIndex(int index) {
+    currentStep = index;
+  }
+
+  @Override public void setRecipeId(int recipeId) {
+    this.recipeId = recipeId;
   }
 
   @Override public void showStep(Step step) {

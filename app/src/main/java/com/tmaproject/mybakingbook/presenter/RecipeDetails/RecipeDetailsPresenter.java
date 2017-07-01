@@ -8,25 +8,29 @@ import io.reactivex.observers.DisposableSingleObserver;
 import timber.log.Timber;
 
 /**
- * Created by tarekkma on 6/27/17.
+ * Created by TarekLMA on 6/27/17.
+ * tarekkma@gmail.com
  */
 
-class RecipeDetailsPresenter implements RecipeDetailsContract.Presenter {
+public class RecipeDetailsPresenter implements RecipeDetailsContract.Presenter {
 
-  CompositeDisposable compositeDisposable = new CompositeDisposable();
+  private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-  GetRecipeInteractor interactor;
+  private GetRecipeInteractor interactor;
 
-  RecipeDetailsContract.View view;
-  int recipeId;
+  private RecipeDetailsContract.View view;
+  private int recipeId;
 
-  public RecipeDetailsPresenter(RecipeDetailsContract.View view, int recipeId) {
-    this.view = view;
-    this.recipeId = recipeId;
+  public RecipeDetailsPresenter() {
     interactor = new GetRecipeInteractor();
   }
 
-  @Override public void subscribe() {
+  @Override public RecipeDetailsContract.View getView() {
+    return view;
+  }
+
+  @Override public void subscribe(RecipeDetailsContract.View view) {
+    this.view = view;
     loadRecipeDetails();
   }
 
@@ -50,6 +54,10 @@ class RecipeDetailsPresenter implements RecipeDetailsContract.Presenter {
           }
         })
     );
+  }
+
+  @Override public void setRecipeId(int recipeId) {
+    this.recipeId = recipeId;
   }
 }
 

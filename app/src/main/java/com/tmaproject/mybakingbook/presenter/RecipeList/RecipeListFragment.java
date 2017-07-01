@@ -14,9 +14,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.Utils.ResponsiveUi;
+import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import com.tmaproject.mybakingbook.presenter.RecipeDetails.RecipeDetailsActivity;
 import com.tmaproject.mybakingbook.presenter.RecipeList.RecipeListContract.Presenter;
-import com.tmaproject.mybakingbook.data.pojo.Recipe;
 import java.util.List;
 
 /**
@@ -35,11 +35,11 @@ public class RecipeListFragment extends Fragment implements RecipeListContract.V
 
   private RecipeListAdapter mAdapter;
 
-  public static RecipeListFragment newInstance() {
-    return new RecipeListFragment();
+  public RecipeListFragment() {
   }
 
-  public RecipeListFragment() {
+  public static RecipeListFragment newInstance() {
+    return new RecipeListFragment();
   }
 
   @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,13 +61,11 @@ public class RecipeListFragment extends Fragment implements RecipeListContract.V
     mAdapter = new RecipeListAdapter(
         recipe -> RecipeDetailsActivity.startThisActivity(getContext(), recipe.getId()));
     recycler.setAdapter(mAdapter);
-
-    presenter = new RecipeListPresenter(this);
   }
 
   @Override public void onResume() {
     super.onResume();
-    presenter.subscribe();
+    presenter.subscribe(this);
   }
 
   @Override public void onDestroy() {
@@ -99,5 +97,9 @@ public class RecipeListFragment extends Fragment implements RecipeListContract.V
 
   @Override public Presenter getPresenter() {
     return presenter;
+  }
+
+  @Override public void setPresenter(Presenter presenter) {
+    this.presenter = presenter;
   }
 }

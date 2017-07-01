@@ -1,15 +1,19 @@
 package com.tmaproject.mybakingbook.presenter;
 
 /**
- * Created by tarekkma on 6/23/17.
+ * Created by TarekKMA on 6/23/17.
+ * tarekkma@gmail.com
  */
 
 public interface BaseContract {
-  interface BaseView{
-
+  interface BaseView<P> {
+    void setPresenter(P presenter);
   }
-  interface BasePresenter{
-    void subscribe();
+
+  interface BasePresenter<V> {
+    V getView();
+
+    void subscribe(V view);
     void unsubscribe();
   }
 }

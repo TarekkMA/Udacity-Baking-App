@@ -2,6 +2,7 @@ package com.tmaproject.mybakingbook.presenter.RecipeList;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -10,24 +11,23 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.tmaproject.mybakingbook.App;
 import com.tmaproject.mybakingbook.R;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
+  private static final String TAG_RECIPE_LIST_FRAGMENT = "TAG_RECIPE_LIST_FRAGMENT";
   @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
-
   @BindView(R.id.toolbar) Toolbar mToolbar;
-
-  @BindView(R.id.main_activity_container)View containerView;
-
+  @BindView(R.id.main_activity_container) View containerView;
   private RecipeListContract.View recipeListFragment;
+  private RecipeListContract.Presenter presenter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -46,12 +46,22 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
-    if(savedInstanceState == null) {
+    if (savedInstanceState == null) {
       recipeListFragment = RecipeListFragment.newInstance();
 
       getSupportFragmentManager().
-          beginTransaction().replace(R.id.fragmentFrame, (Fragment) recipeListFragment).commit();
+          beginTransaction()
+          .replace(R.id.fragmentFrame, (Fragment) recipeListFragment, TAG_RECIPE_LIST_FRAGMENT)
+          .commit();
     }
+
+    if (recipeListFragment == null) {
+      recipeListFragment = (RecipeListContract.View) getSupportFragmentManager().findFragmentByTag(
+          TAG_RECIPE_LIST_FRAGMENT);
+    }
+
+    RecipeListContract.Presenter presenter = App.get().presenterProvider.provideRecipeList();
+    recipeListFragment.setPresenter(presenter);
   }
 
   @Override public void onBackPressed() {
@@ -67,7 +77,8 @@ public class MainActivity extends AppCompatActivity
 
     switch (id) {
       case R.id.nav_about:
-        Snackbar.make(containerView,"A Nanodegree Project For Udacity Course",Snackbar.LENGTH_LONG).show();
+        Snackbar.make(containerView, "A Nanodegree Project For Udacity Course",
+            Snackbar.LENGTH_LONG).show();
         break;
       case R.id.nav_sourcecode:
         Intent browserIntent = new Intent(Intent.ACTION_VIEW,

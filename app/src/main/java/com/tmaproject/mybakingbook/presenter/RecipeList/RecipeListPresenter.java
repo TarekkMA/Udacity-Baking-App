@@ -10,7 +10,8 @@ import java.util.List;
 import timber.log.Timber;
 
 /**
- * Created by tarekkma on 6/23/17.
+ * Created by TarekLMA on 6/23/17.
+ * tarekkma@gmail.com
  */
 
 public class RecipeListPresenter implements RecipeListContract.Presenter {
@@ -21,13 +22,17 @@ public class RecipeListPresenter implements RecipeListContract.Presenter {
 
   private RecipeListContract.View mView;
 
-  public RecipeListPresenter(RecipeListContract.View view) {
+  public RecipeListPresenter() {
     interactor = new GetRecipeListInteractor();
-    mView = view;
   }
 
-  @Override public void subscribe() {
+  @Override public RecipeListContract.View getView() {
+    return mView;
+  }
+
+  @Override public void subscribe(RecipeListContract.View view) {
     Timber.d("Presenter Subscribing");
+    this.mView = view;
     getRecipeList();
   }
 

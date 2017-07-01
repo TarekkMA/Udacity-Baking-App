@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,27 +20,23 @@ import com.squareup.picasso.Picasso;
 import com.tmaproject.mybakingbook.R;
 import com.tmaproject.mybakingbook.data.pojo.Step;
 import com.tmaproject.mybakingbook.presenter.Callbacks;
-import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class StepsFragment extends Fragment implements StepsContract.View ,Callbacks.StepClicked {
 
-  private Unbinder unbinder;
-
+  private static final String KEY_RECIPE_ID = "RECIPE_ID";
+  private static final String KEY_STEP_ID = "STEP_ID";
   @BindView(R.id.video_player) SimpleExoPlayerView playerView;
   @BindView(R.id.step_image) ImageView stepImage;
   @BindView(R.id.step_text) TextView stepText;
   @BindView(R.id.back_btn) FloatingActionButton backBtn;
   @BindView(R.id.next_btn) FloatingActionButton nextBtn;
   @BindView(R.id.step_nav_num) TextView stepIndexText;
-
-  private static final String KEY_RECIPE_ID = "RECIPE_ID";
-  private static final String KEY_STEP_ID = "STEP_ID";
-
-  StepsPresenter presenter;
-
+  StepsContract.Presenter presenter;
+  private Unbinder unbinder;
+  private int stepIndex = -1;
 
   public StepsFragment() {
 
@@ -66,15 +61,13 @@ public class StepsFragment extends Fragment implements StepsContract.View ,Callb
     View view = inflater.inflate(R.layout.fragment_steps, container, false);
     unbinder = ButterKnife.bind(this, view);
 
-    int stepId;
     if (savedInstanceState != null) {
-      stepId = savedInstanceState.getInt(KEY_STEP_ID);
+      stepIndex = savedInstanceState.getInt(KEY_STEP_ID);
     } else {
-      stepId = getArguments().getInt(KEY_STEP_ID);
+      stepIndex = getArguments().getInt(KEY_STEP_ID);
     }
-    int recipeId = getArguments().getInt(KEY_RECIPE_ID);
 
-    presenter = new StepsPresenter(this, recipeId, stepId);
+    presenter.setCurrentIndex(stepIndex);
 
     nextBtn.setOnClickListener(v -> presenter.showNextStep());
     backBtn.setOnClickListener(v -> presenter.showPreviousStep());
@@ -84,7 +77,7 @@ public class StepsFragment extends Fragment implements StepsContract.View ,Callb
 
   @Override public void onResume() {
     super.onResume();
-    presenter.subscribe();
+    presenter.subscribe(this);
   }
 
   @Override public void onPause() {
@@ -136,5 +129,10 @@ public class StepsFragment extends Fragment implements StepsContract.View ,Callb
 
   @Override public void onClick(Step step) {
     presenter.showStep(step);
+  }
+
+  @Override public void setPresenter(StepsContract.Presenter presenter) {
+    this.presenter = presenter;
+
   }
 }
