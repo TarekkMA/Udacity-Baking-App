@@ -45,8 +45,8 @@ public class StepsPresenter implements StepsContract.Presenter {
   private void showStepAt(int pos){
 
     view.setBackVisibility(pos!=0);
-    view.setNextVisibility(pos!=recipe.getSteps().size());
-    view.setStepNum(currentStep+"/"+recipe.getSteps().size());
+    view.setNextVisibility(pos != recipe.getSteps().size() - 1);
+    view.setStepNum(currentStep + "/" + (recipe.getSteps().size() - 1));
 
     Step step = recipe.getSteps().get(pos);
 
