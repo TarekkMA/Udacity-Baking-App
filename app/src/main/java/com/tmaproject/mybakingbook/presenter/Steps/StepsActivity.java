@@ -22,10 +22,12 @@ public class StepsActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_steps);
 
-    int recipeId = getIntent().getIntExtra(KEY_RECIPE_ID, -1);
-    int stepId = getIntent().getIntExtra(KEY_STEP_ID, -1);
-    Fragment fragment = StepsFragment.newInstance(recipeId,stepId);
+    if(savedInstanceState == null) {
+      int recipeId = getIntent().getIntExtra(KEY_RECIPE_ID, -1);
+      int stepId = getIntent().getIntExtra(KEY_STEP_ID, -1);
+      Fragment fragment = StepsFragment.newInstance(recipeId, stepId);
 
-    getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment).commit();
+      getSupportFragmentManager().beginTransaction().replace(R.id.fragmentFrame, fragment).commit();
+    }
   }
 }

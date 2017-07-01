@@ -2,6 +2,7 @@ package com.tmaproject.mybakingbook.presenter.RecipeList;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,10 +70,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.VH
       ingredientsCountText.setText(String.valueOf(recipe.getIngredients().size()));
       servingsCountText.setText(String.valueOf(recipe.getServings()));
       stepsCountText.setText(String.valueOf(recipe.getSteps().size()));
-      if(itemView!=null)
-      Picasso.with(itemView.getContext())
-          .load(recipe.getImage())
-          .into(imageView);
+      if (TextUtils.isEmpty(recipe.getImage()) == false) {
+        Picasso.with(itemView.getContext())
+            .load(recipe.getImage())
+            .into(imageView);
+      }
     }
   }
 }

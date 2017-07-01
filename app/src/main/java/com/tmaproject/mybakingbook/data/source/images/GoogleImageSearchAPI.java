@@ -2,6 +2,8 @@ package com.tmaproject.mybakingbook.data.source.images;
 
 import android.content.Context;
 import android.os.Handler;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.tmaproject.mybakingbook.App;
 import com.tmaproject.mybakingbook.BuildConfig;
 import com.tmaproject.mybakingbook.Utils.PreferencesUtils;
@@ -20,6 +22,7 @@ import timber.log.Timber;
  * Created by tarekkma on 6/19/17.
  */
 
+
 public class GoogleImageSearchAPI {
 
   public static Single<String> getFirstImage(String query) {
@@ -37,13 +40,15 @@ public class GoogleImageSearchAPI {
 
     return Single.fromCallable(() -> App.get().client.newCall(request).execute()).map(response -> {
       String string = getFirstImageFromJson(response.body().string());
-      //cache the result
+      //cache the result because search api free is limited to 100 requests a day
       App.get().preferencesUtils.saveRecipeImage(query,string);
       return string;
     });
   }
 
   private static String getFirstImageFromJson(String json) {
+    // The returned json is complex and we only want the first result
+    // so no need to create pojo class and use Gson
     try {
       JSONObject root = new JSONObject(json);
       JSONArray items = root.getJSONArray("items");

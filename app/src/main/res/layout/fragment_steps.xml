@@ -26,6 +26,13 @@
           app:use_controller="false"
           android:visibility="gone"
           />
+      <ImageView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:adjustViewBounds="true"
+          android:visibility="gone"
+          android:id="@+id/step_image"
+          />
       <TextView
           android:id="@+id/step_text"
           android:padding="@dimen/default_spacing"

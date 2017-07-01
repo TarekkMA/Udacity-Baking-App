@@ -1,6 +1,7 @@
 package com.tmaproject.mybakingbook.presenter.Steps;
 
 import android.net.Uri;
+import android.text.TextUtils;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSource;
@@ -60,7 +61,7 @@ public class StepsPresenter implements StepsContract.Presenter {
     SimpleExoPlayer exoPlayer = null;
 
 
-    if(step.getVideoURL() != null && !step.getVideoURL().isEmpty()){
+    if(!TextUtils.isEmpty(step.getVideoURL())){
       exoPlayer = ExoPlayerFactory.newSimpleInstance(
           App.get()
           ,new DefaultTrackSelector());

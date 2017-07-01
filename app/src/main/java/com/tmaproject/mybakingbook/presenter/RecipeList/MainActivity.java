@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.tmaproject.mybakingbook.R;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity
   @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 
   @BindView(R.id.toolbar) Toolbar mToolbar;
+
+  @BindView(R.id.main_activity_container)View containerView;
 
   private RecipeListContract.View recipeListFragment;
 
@@ -43,10 +46,12 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
-    recipeListFragment = RecipeListFragment.newInstance();
+    if(savedInstanceState == null) {
+      recipeListFragment = RecipeListFragment.newInstance();
 
-    getSupportFragmentManager().
-        beginTransaction().replace(R.id.fragmentFrame, (Fragment) recipeListFragment).commit();
+      getSupportFragmentManager().
+          beginTransaction().replace(R.id.fragmentFrame, (Fragment) recipeListFragment).commit();
+    }
   }
 
   @Override public void onBackPressed() {
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity
 
     switch (id) {
       case R.id.nav_about:
-        Toast.makeText(this, "Make Dialog ,Tarek", Toast.LENGTH_SHORT).show();
+        Snackbar.make(containerView,"A Nanodegree Project For Udacity Course",Snackbar.LENGTH_LONG).show();
         break;
       case R.id.nav_sourcecode:
         Intent browserIntent = new Intent(Intent.ACTION_VIEW,
